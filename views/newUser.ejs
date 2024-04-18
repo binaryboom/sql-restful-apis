@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Username</title>
+</head>
+
+<body>
+    <h1>Create User</h1>
+
+    <br>
+    <form method="post" action="/users/new" id="newUserForm">
+        <input style="width: 300px;" type="text" name="username" placeholder="Enter username">
+        <br> <br>
+        <input style="width: 300px;" type="email" name="email" placeholder="Enter email">
+        <br> <br>
+        <input style="width: 200px;" type="password" id="p1" name="password" placeholder="Enter Password">
+        <br> <br>
+        <input style="width: 200px;" type="text" id="p2" name="password2" placeholder="Confirm Password">
+        <br> <br>
+        <h4 class="passMatch" style="color:red; display: none;">Passwords do not match !!</h4>
+        <input disabled type="submit" value="Submit" id="submitBtn">
+    </form>
+
+    <script>
+        document.getElementById("p2").addEventListener("input", () => {
+            let pw = document.querySelector("#p1");
+            let pw2 = document.querySelector("#p2");
+            let id=setInterval(()=>{
+                if (pw.value != pw2.value) {
+                    document.querySelector(".passMatch").style.display = "block";
+                    document.getElementById("submitBtn").disabled = true;
+                }
+                if (pw.value == pw2.value) {
+                    document.querySelector(".passMatch").style.display = "none";
+                    clearInterval(id);
+                    document.getElementById("submitBtn").disabled = false;
+                }
+            },1000);
+        })
+    </script>
+</body>
+
+</html>
